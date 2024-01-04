@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title, .item {
+    flex: 0 0 14.28%;
+    text-align: center; /* Center the text for titles */
+    /* Add margin or padding if needed */
+}
+
+.title{
+    font-weight: bold;
+}
+
