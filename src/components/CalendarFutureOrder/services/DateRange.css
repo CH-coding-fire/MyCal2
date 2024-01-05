@@ -1,0 +1,11 @@
+.selectedDate {
+    font-weight: bold;
+    background-color: yellow;
+    border-radius: 23px;
+}
+
+.outOfRange {
+    color: lightgrey;
+    cursor: not-allowed;
+}
+

@@ -1,4 +1,3 @@
-import {isLastDayOfMonth} from "./isLastDayOfMonth";
 
 export function getDayName(date: Date): string {
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -56,7 +55,7 @@ function generateDateRange(startDate: Date, daysToGen: number): Date[] {
     return dateArray;
 }
 
-function getNextDay(inputDate: Date): Date {
+export function getNextDay(inputDate: Date): Date {
     let nextDay = new Date(inputDate);
     // Increment the day by 1
     nextDay.setDate(inputDate.getDate() + 1);
