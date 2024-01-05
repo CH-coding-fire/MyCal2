@@ -9,7 +9,11 @@ export function MyCal() {
     const [monthAndYear, setMonthAndYear] = useState<Date>(new Date(firstDayOfCurrentMonth))
 
     const changeMonth = (monthDelta:number) => {
-        const newDate = new Date(monthAndYear.getFullYear(), monthAndYear.getMonth() + monthDelta, 1);
+        const newDate = new Date(
+            monthAndYear.getFullYear(),
+            monthAndYear.getMonth() + monthDelta,
+            monthAndYear.getDate()
+        );
         setMonthAndYear(newDate);
     };
 
