@@ -1,30 +1,43 @@
 import './CalendarFutureOrder.css'
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {getDateRange, getDayName, getNextDay} from "./services/getDateRange";
-import {DateRange} from "./services/DateRange";
+import { DateRange } from "./DateRange";
+import {toMalaysianTime} from "./services/toMalaysianTime";
+import {MAX_FUTURE_MONTHS, MAX_PREVIOUS_MONTHS} from "../../constants/futureCalendar.constant";
+
 
 export function CalendarFutureOrder() {
-    const currentMalaysiaTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Kuala_Lumpur"}));
-    const nextDayOfCurrentMalaysiaTime = getNextDay(currentMalaysiaTime)
-    // const currentDate = new Date();
-    const firstDateOfCurrentMonth = new Date(currentMalaysiaTime.getFullYear(), currentMalaysiaTime.getMonth(), 1);
-    const [monthAndYear, setMonthAndYear] = useState<Date>(new Date(firstDateOfCurrentMonth))
-    const dayRange = getDateRange(monthAndYear)
-    const [selectedDate, setSelectedDate] = useState<Date | null>(nextDayOfCurrentMalaysiaTime)
+
+
+    const currentMalaysiaTime = toMalaysianTime(new Date());
+    const nextDayOfCurrentMalaysiaTime = getNextDay(currentMalaysiaTime);
+
+    const firstDateOfCurrentMonth = toMalaysianTime(new Date(currentMalaysiaTime.getFullYear(), currentMalaysiaTime.getMonth(), 1));
+    const [monthAndYear, setMonthAndYear] = useState<Date>(firstDateOfCurrentMonth);
+    const dayRange = getDateRange(monthAndYear);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(nextDayOfCurrentMalaysiaTime);
+
     const handleSelectedDate = (dateObj: Date): void => {
-        setSelectedDate(dateObj)
+        setSelectedDate(toMalaysianTime(dateObj));
     }
 
-    const changeMonth = (monthDelta: (1 | -1)) => {
-        const newDate = new Date(
-            monthAndYear.getFullYear(),
-            monthAndYear.getMonth() + monthDelta,
-            monthAndYear.getDate()
-        );
-        setMonthAndYear(newDate);
-        setSelectedDate(null)
+    const canChangeMonth = (monthDelta: number): boolean => {
+        const newMonth = new Date(monthAndYear.getFullYear(), monthAndYear.getMonth() + monthDelta, 1);
+        const monthsDifference = (newMonth.getFullYear() - currentMalaysiaTime.getFullYear()) * 12 + newMonth.getMonth() - currentMalaysiaTime.getMonth();
+        return monthsDifference >= -MAX_PREVIOUS_MONTHS && monthsDifference <= MAX_FUTURE_MONTHS;
     };
 
+    const changeMonth = (monthDelta: (1 | -1)) => {
+        if (canChangeMonth(monthDelta)) {
+            const newDate = toMalaysianTime(new Date(
+                monthAndYear.getFullYear(),
+                monthAndYear.getMonth() + monthDelta,
+                1
+            ));
+            setMonthAndYear(newDate);
+            setSelectedDate(null);
+        }
+    };
 
     //start of animation
 
@@ -99,7 +112,6 @@ export function CalendarFutureOrder() {
                     </div>
                 ) : <div style={{color: "red"}}>Nothing is selected!!!</div>}
             </div>
-
 
             <button onClick={() => changeMonth(-1)}>Last month</button>
             <button onClick={() => changeMonth(1)}>Next month</button>

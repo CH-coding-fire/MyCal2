@@ -1,6 +1,6 @@
-import {isSameDate} from "./isSameDate";
+import {isSameDate} from "./services/isSameDate";
 import "./DateRange.css"
-import {isWithinExpiryRange} from "./isWithinExpiryRange";
+import {isWithinExpiryRange} from "./services/isWithinExpiryRange";
 
 export function DateRange(props: {
     dayRange: Date[],
