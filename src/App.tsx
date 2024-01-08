@@ -7,12 +7,15 @@ import StyledButton from "./components/Buttons/Button";
 function App() {
     return (
         <div className="App">
+
+            <CalendarFutureOrder/>
+            <div>-----------------------------------</div>
+            <LibCal/>
+
             <StyledButton>helloWorld</StyledButton>
             <div><br/></div>
             <StyledButton variant='outline'>helloWorld</StyledButton>
             <button>Button</button>
-            <CalendarFutureOrder/>
-            <LibCal/>
         </div>
     );
 }

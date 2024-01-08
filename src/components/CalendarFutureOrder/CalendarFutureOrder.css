@@ -13,3 +13,38 @@
     font-weight: bold;
 }
 
+@keyframes swipeLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes swipeRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes incomingLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes incomingRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+.animate-left {
+    animation: swipeLeft 0.125s forwards;
+}
+
+.animate-right {
+    animation: swipeRight 0.125s forwards;
+}
+
+.incoming-left {
+    animation: incomingLeft 0.125s forwards;
+}
+
+.incoming-right {
+    animation: incomingRight 0.125s forwards;
+}

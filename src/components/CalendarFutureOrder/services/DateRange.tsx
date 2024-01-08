@@ -1,6 +1,6 @@
 import {isSameDate} from "./isSameDate";
 import "./DateRange.css"
-import {isWithinCurrentOrNext30Days} from "./isWithinCurrentOrNext30Days";
+import {isWithinExpiryRange} from "./isWithinExpiryRange";
 
 export function DateRange(props: {
     dayRange: Date[],
@@ -24,12 +24,12 @@ export function DateRange(props: {
                         className={`item `}
                         key={index}
                         onClick={() => {
-                            if (isWithinCurrentOrNext30Days(item, props.currentDate)) {
+                            if (isWithinExpiryRange(item, props.currentDate)) {
                                 props.handleSelectedDate(item);
                             }
                         }}
                     >
-                        <span className={`${isSelectedDate ? 'selectedDate' : ''} ${isWithinCurrentOrNext30Days(item, props.currentDate) ? "" : "outOfRange"}`}>
+                        <span className={`${isSelectedDate ? 'selectedDate' : ''} ${isWithinExpiryRange(item, props.currentDate) ? "" : "outOfRange"}`}>
                         {item.getDate()}
                         </span>
                     </div>
