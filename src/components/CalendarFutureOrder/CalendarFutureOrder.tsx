@@ -47,8 +47,9 @@ export function CalendarFutureOrder() {
     let endX: number;
 
     const handleSwipe = (): void => {
+
         const swipeDistance: number = endX - startX;
-        if (swipeDistance > 50) {
+        if (swipeDistance > 50 && canChangeMonth(-1)) {
             setAnimation('animate-right');
             setTimeout(() => {
                 changeMonth(-1);
@@ -58,7 +59,7 @@ export function CalendarFutureOrder() {
                 setAnimation('');
                 setIncomingAnimation('');
             }, 125); // Reset animations after 0.125s
-        } else if (swipeDistance < -50) {
+        } else if (swipeDistance < -50  && canChangeMonth(+1)) {
             setAnimation('animate-left');
             setTimeout(() => {
                 changeMonth(1);
