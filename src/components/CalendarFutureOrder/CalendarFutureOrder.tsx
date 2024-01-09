@@ -3,7 +3,11 @@ import {useEffect, useState} from "react";
 import {getDateRange, getDayName, getNextDay} from "./services/getDateRange";
 import {DateRange} from "./DateRange";
 import {toMalaysianTime} from "./services/toMalaysianTime";
-import {MAX_FUTURE_MONTHS, MAX_PREVIOUS_MONTHS} from "../../constants/futureCalendar.constant";
+import {
+    EXPIRY_DAYS_RANGE_T_PLUS_29,
+    MAX_FUTURE_MONTHS,
+    MAX_PREVIOUS_MONTHS
+} from "../../constants/futureCalendar.constant";
 
 
 export function CalendarFutureOrder() {
@@ -98,24 +102,9 @@ export function CalendarFutureOrder() {
     //end of animation
 
     return (
-        <div>
+        <>
             <h1>MyCal (base on malay time)</h1>
 
-            <div>
-                firstDayOfViewingMonth: {monthAndYear.getFullYear()} - {monthAndYear.toLocaleString('default', {month: 'long'})} - {monthAndYear.getDate()} - {getDayName(monthAndYear)}
-            </div>
-
-            <div>
-                Selected Date:
-                {selectedDate ? (
-                    <div>
-                        {selectedDate.getFullYear()} - {selectedDate.toLocaleString('default', {month: 'long'})} - {selectedDate.getDate()} - {getDayName(selectedDate)}
-                    </div>
-                ) : <div style={{color: "red"}}>Nothing is selected!!!</div>}
-            </div>
-
-            <button onClick={() => changeMonth(-1)}>Last month</button>
-            <button onClick={() => changeMonth(1)}>Next month</button>
 
             <div className={"container-ex"}>
                 <div className={"monthYearContainer"}>
@@ -135,7 +124,6 @@ export function CalendarFutureOrder() {
                     </div>
                 </div>
             </div>
-
             <div id={"calendarContainer"} className={`${animation} ${incomingAnimation} calendar-container`}>
                 <DateRange
                     dayRange={dayRange}
@@ -144,7 +132,24 @@ export function CalendarFutureOrder() {
                     currentDate={currentMalaysiaTime}
                 />
             </div>
-        </div>
+            <div>--------for debug--------------</div>
+            <div>
+                firstDayOfViewingMonth: {monthAndYear.getFullYear()} - {monthAndYear.toLocaleString('default', {month: 'long'})} - {monthAndYear.getDate()} - {getDayName(monthAndYear)}
+            </div>
+            <div>
+                Selected Date:
+                {selectedDate ? (
+                    <div>
+                        {selectedDate.getFullYear()} - {selectedDate.toLocaleString('default', {month: 'long'})} - {selectedDate.getDate()} - {getDayName(selectedDate)}
+                    </div>
+                ) : <div style={{color: "red"}}>Nothing is selected!!!</div>}
+            </div>
+            <button onClick={() => changeMonth(-1)}>Last month</button>
+            <button onClick={() => changeMonth(1)}>Next month</button>
+            <div>Expiry range: T+{EXPIRY_DAYS_RANGE_T_PLUS_29}</div>
+            <div>Date view: previous {MAX_PREVIOUS_MONTHS} months</div>
+            <div>Date view: future {MAX_FUTURE_MONTHS} months</div>
+        </>
     )
 }
 
