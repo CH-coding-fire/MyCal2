@@ -1,11 +1,35 @@
 .selectedDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
-    background-color: yellow;
-    border-radius: 23px;
+    background-color:  #ffc600;
+    border-radius: 40px;
+    height: 35px;
+    width: 35px
 }
 
 .outOfRange {
     color: lightgrey;
     cursor: not-allowed;
 }
+
+.date-num{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px
+}
+
+.weekday-name, .date-num {
+    flex: 0 0 14.28%;
+    text-align: center; /* Center the text for weekday-names */
+    /* Add margin or padding if needed */
+}
+
+.weekday-name{
+    font-weight: bold;
+    height:45px
+}
+
 

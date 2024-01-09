@@ -1,13 +1,12 @@
 import './CalendarFutureOrder.css'
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {getDateRange, getDayName, getNextDay} from "./services/getDateRange";
-import { DateRange } from "./DateRange";
+import {DateRange} from "./DateRange";
 import {toMalaysianTime} from "./services/toMalaysianTime";
 import {MAX_FUTURE_MONTHS, MAX_PREVIOUS_MONTHS} from "../../constants/futureCalendar.constant";
 
 
 export function CalendarFutureOrder() {
-
 
     const currentMalaysiaTime = toMalaysianTime(new Date());
     const nextDayOfCurrentMalaysiaTime = getNextDay(currentMalaysiaTime);
@@ -99,7 +98,8 @@ export function CalendarFutureOrder() {
 
     return (
         <div>
-            <h1>MyCal</h1>
+            <h1>MyCal (base on malay time)</h1>
+
             <div>
                 firstDayOfViewingMonth: {monthAndYear.getFullYear()} - {monthAndYear.toLocaleString('default', {month: 'long'})} - {monthAndYear.getDate()} - {getDayName(monthAndYear)}
             </div>
@@ -116,7 +116,26 @@ export function CalendarFutureOrder() {
             <button onClick={() => changeMonth(-1)}>Last month</button>
             <button onClick={() => changeMonth(1)}>Next month</button>
 
-            <div id={"calendarContainer"} className={`${animation} ${incomingAnimation}`}>
+            <div className={"container-ex"}>
+                <div className={"monthYearContainer"}>
+                    <div
+                        className={"time-oval-container"}
+                    >
+                        <div className={"month-date-font"}>
+                            {monthAndYear.toLocaleString('en-US', {month: 'short'}).toUpperCase()}
+                        </div>
+                    </div>
+                    <div
+                        className={"time-oval-container"}
+                    >
+                        <div className={"month-date-font"}>
+                            {monthAndYear.toLocaleString('en-MY', {year: 'numeric', timeZone: 'Asia/Kuala_Lumpur'})}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id={"calendarContainer"} className={`${animation} ${incomingAnimation} calendar-container`}>
                 <DateRange
                     dayRange={dayRange}
                     selectedDate={selectedDate}
@@ -124,7 +143,6 @@ export function CalendarFutureOrder() {
                     currentDate={currentMalaysiaTime}
                 />
             </div>
-
         </div>
     )
 }

@@ -9,19 +9,19 @@ export function DateRange(props: {
     currentDate:Date
 }) {
     return (
-        <div className="container">
-            <div className="title">M</div>
-            <div className="title">T</div>
-            <div className="title">W</div>
-            <div className="title">T</div>
-            <div className="title">F</div>
-            <div className="title">S</div>
-            <div className="title">S</div>
+        <div className="date-container">
+            <div className="weekday-name">M</div>
+            <div className="weekday-name">T</div>
+            <div className="weekday-name">W</div>
+            <div className="weekday-name">T</div>
+            <div className="weekday-name">F</div>
+            <div className="weekday-name">S</div>
+            <div className="weekday-name">S</div>
             {props.dayRange.map((item, index) => {
                 const isSelectedDate = props.selectedDate && isSameDate(item, props.selectedDate);
                 return (
                     <div
-                        className={`item `}
+                        className={`date-num`}
                         key={index}
                         onClick={() => {
                             if (isWithinExpiryRange(item, props.currentDate)) {
@@ -29,9 +29,15 @@ export function DateRange(props: {
                             }
                         }}
                     >
-                        <span className={`${isSelectedDate ? 'selectedDate' : ''} ${isWithinExpiryRange(item, props.currentDate) ? "" : "outOfRange"}`}>
+
+                        <div
+                            className={`${isSelectedDate ? 'selectedDate' : ''} 
+                            ${isWithinExpiryRange(item, props.currentDate) ? "" : "outOfRange"}`}
+                        >
+                            <span>
                         {item.getDate()}
-                        </span>
+                                </span>
+                        </div>
                     </div>
                 )
             })
